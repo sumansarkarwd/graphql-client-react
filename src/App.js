@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ApolloClient from 'apollo-boost';
+import {ApolloProvider} from 'react-apollo';
+
+// components
+import BookList from "./components/BookList";
+import AddBook from "./components/AddBook";
+
+// apollo client setup
+const apolloClient = new ApolloClient({
+  uri: "http://127.0.0.1:4000/graphql"
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={apolloClient} >
+      <div className="App">
+        <h1 className="is-size-3">Ninja reading the list</h1>
+        <BookList />
+        <AddBook />
+      </div>
+    </ApolloProvider>
   );
 }
 
